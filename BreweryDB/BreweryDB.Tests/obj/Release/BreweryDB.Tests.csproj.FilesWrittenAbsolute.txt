@@ -1,0 +1,11 @@
+/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDB.Tests/obj/Release/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDB.Tests/bin/Release/BreweryDB.Tests.dll.mdb
+/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDB.Tests/bin/Release/BreweryDB.Tests.dll
+/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDB.Tests/obj/Release/BreweryDB.Tests.dll
+/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDB.Tests/obj/Release/BreweryDB.Tests.dll.mdb
+/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDB.Tests/bin/Release/nunit.framework.dll
+/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDB.Tests/bin/Release/BreweryDB.dll
+/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDB.Tests/bin/Release/BreweryDB.dll.mdb
+/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDB.Tests/bin/Release/System.Net.Http.dll
+/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDB.Tests/bin/Release/Newtonsoft.Json.dll
+/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDB.Tests/bin/Release/System.Net.Http.Primitives.dll

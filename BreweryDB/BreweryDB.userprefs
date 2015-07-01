@@ -1,1 +1,52 @@
-﻿<Properties StartupItem="BreweryDB.csproj" />
+﻿<Properties StartupItem="BreweryDB.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/Adjunct.cs">
+    <Files>
+      <File FileName="BreweryDBClient.cs" Line="53" Column="13" />
+      <File FileName="Helpers/ExtensionMethods.cs" Line="1" Column="1" />
+      <File FileName="Models/Available.cs" Line="13" Column="32" />
+      <File FileName="Models/Beer.cs" Line="7" Column="12" />
+      <File FileName="Models/Brewery.cs" Line="1" Column="1" />
+      <File FileName="Models/Category.cs" Line="1" Column="1" />
+      <File FileName="Models/Country.cs" Line="1" Column="1" />
+      <File FileName="Models/Glass.cs" Line="1" Column="1" />
+      <File FileName="Models/Images.cs" Line="1" Column="1" />
+      <File FileName="Models/Labels.cs" Line="1" Column="1" />
+      <File FileName="Models/Location.cs" Line="1" Column="1" />
+      <File FileName="Models/Response.cs" Line="1" Column="1" />
+      <File FileName="Models/Srm.cs" Line="1" Column="1" />
+      <File FileName="Models/Style.cs" Line="1" Column="1" />
+      <File FileName="Enums/Status.cs" Line="16" Column="1" />
+      <File FileName="Models/Adjunct.cs" Line="11" Column="47" />
+      <File FileName="Models/Page.cs" Line="15" Column="1" />
+      <File FileName="BreweryDBQuery.cs" Line="38" Column="30" />
+      <File FileName="BreweryDB.Tests/Test.cs" Line="13" Column="6" />
+      <File FileName="BreweryDB.Tests/BreweryDBQuery.cs" Line="22" Column="50" />
+    </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State name="__root__">
+          <Node name="BreweryDB" expanded="True">
+            <Node name="Tests" expanded="True">
+              <Node name="BreweryDB.Tests" expanded="True">
+                <Node name="BreweryDB" expanded="True">
+                  <Node name="Tests" expanded="True">
+                    <Node name="Query" expanded="True">
+                      <Node name="QueryBeerByName" selected="True" />
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/mikejames/Git/BreweryDB/BreweryDB/BreweryDBQuery.cs" line="41" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
