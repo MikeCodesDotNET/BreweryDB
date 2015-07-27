@@ -13,7 +13,7 @@ namespace BreweryDB.Tests
         [Test()]
         public async void AllBreweries()
         {
-            BreweryDBClient.Initialize(Keys.ApplicationKey, "BeerDrinkin");
+            BreweryDBClient.Initialize(Keys.ApplicationKey);
 
             var query = new BreweryDBQuery<Brewery>();
             var results = await query.FindAsync();
@@ -24,7 +24,8 @@ namespace BreweryDB.Tests
         [Test()]
         public async void ByName()
         {
-            BreweryDBClient.Initialize(Keys.ApplicationKey, "BeerDrinkin");
+            BreweryDBClient.Initialize(Keys.ApplicationKey);
+            BreweryDBClient.Initialize(Keys.ApplicationKey);
             var query = new BreweryDBQuery<Brewery>();
             var results = await query.FindAsync("Duvel Moortgat");
 

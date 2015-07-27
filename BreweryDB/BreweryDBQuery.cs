@@ -7,20 +7,19 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Collections.ObjectModel;
 using BreweryDB.Helpers;
-using Akavache;
-using System.Reactive.Linq; 
+using System.Reactive.Linq;
 
 namespace BreweryDB
 {
     public class BreweryDBQuery<T>
     {
-        HttpClient httpClient; 
+        HttpClient httpClient;
 
         public BreweryDBQuery()
         {
             Initialize();
         }
-            
+
         void Initialize()
         {
             httpClient = httpClient ?? new HttpClient();
@@ -58,7 +57,7 @@ namespace BreweryDB
         {
             return await Find(parameters);
         }
-         
+
         async Task<Page<T>> Find(List<KeyValuePair<string, string>> parameters)
         {
             string param = ExtensionMethods.BuildParametersList(parameters);
@@ -71,6 +70,7 @@ namespace BreweryDB
         #endregion
 
         #region Search
+
         //Searching the DB will return lots of data. 9 times out of 10 you'll want to be searching for beers and breweries rather than findng them.
         public async Task<IEnumerable<T>> SearchAsync(string searchTerm)
         {
@@ -78,9 +78,11 @@ namespace BreweryDB
 
             var url = string.Format("https://api.brewerydb.com/v2/search/?q={0}&withBreweries=n&key={1}&format=json", searchTerm, BreweryDBClient.ApplicationKey);
 
-            var jsonString = await BlobCache.LocalMachine.DownloadUrl(url, null, BreweryDBClient.UseCache, DateTimeOffset.Now.AddDays(BreweryDBClient.CacheValidateForDayCount));
+            var task = httpClient.GetAsync(url);
 
-            //var jsonString = await httpClient.GetStringAsync(url);
+            var response = task.Result;
+
+            var jsonString = await httpClient.GetStringAsync(url);
             model = JsonConvert.DeserializeObject<Models.Response>(jsonString.ToString());
             model.Data = JsonConvert.DeserializeObject<ObservableCollection<T>>(model.Data.ToString());
 
@@ -88,9 +90,11 @@ namespace BreweryDB
 
             return beersToReturn;
         }
+
         #endregion
 
         #region Private
+
         string BuildUrl(string param)
         {
             var queryType = string.Empty;
@@ -101,7 +105,7 @@ namespace BreweryDB
             if (typeof(T) == typeof(Brewery))
                 queryType = "breweries";
             
-            return string.Format("https://api.brewerydb.com/v2/{0}?{1}",queryType, param);
+            return string.Format("https://api.brewerydb.com/v2/{0}?{1}", queryType, param);
         }
 
         #endregion

@@ -13,18 +13,18 @@ namespace BreweryDB.Tests
         [Test()]
         public async void AllBeers()
         {
-            BreweryDBClient.Initialize(Keys.ApplicationKey, "BeerDrinkin");
+            BreweryDBClient.Initialize(Keys.ApplicationKey);
 
             var query = new BreweryDBQuery<Beer>();
             var results = await query.FindAsync();
 
             Assert.IsNotNull(results);
         }
-      
+
         [Test()]
         public async void ByName()
         {
-            BreweryDBClient.Initialize(Keys.ApplicationKey, "BeerDrinkin");
+            BreweryDBClient.Initialize(Keys.ApplicationKey);
 
             var query = new BreweryDBQuery<Beer>();
             var results = await query.FindAsync("duvel");
@@ -35,7 +35,7 @@ namespace BreweryDB.Tests
         [Test()]
         public async void SearchByName()
         {
-            BreweryDBClient.Initialize(Keys.ApplicationKey, "BeerDrinkin");
+            BreweryDBClient.Initialize(Keys.ApplicationKey);
 
             var query = new BreweryDBQuery<Beer>();
             var results = await query.SearchAsync("duvel");
@@ -46,7 +46,7 @@ namespace BreweryDB.Tests
         [Test()]
         public async void ById()
         {
-            BreweryDBClient.Initialize(Keys.ApplicationKey, "BeerDrinkin");
+            BreweryDBClient.Initialize(Keys.ApplicationKey);
             var id = "c8VKLu"; //ID for Duvel
 
             var parameters = new List<KeyValuePair<string, string>>();
@@ -61,7 +61,7 @@ namespace BreweryDB.Tests
         [Test()]
         public async void ByAbv()
         {
-            BreweryDBClient.Initialize(Keys.ApplicationKey, "BeerDrinkin");
+            BreweryDBClient.Initialize(Keys.ApplicationKey);
 
             var parameters = new List<KeyValuePair<string, string>>();
             parameters.Add(new KeyValuePair<string, string>(BeerRequestParameters.abv.ToString(), "8.5"));

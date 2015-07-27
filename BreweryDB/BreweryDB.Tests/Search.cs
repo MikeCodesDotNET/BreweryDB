@@ -10,7 +10,7 @@ namespace BreweryDB.Tests
         [Test()]
         public async void ForBeersByName()
         {
-            BreweryDBClient.Initialize(Keys.ApplicationKey, "BeerDrinkin");
+            BreweryDBClient.Initialize(Keys.ApplicationKey);
 
             var query = new BreweryDBSearch<Beer>("duvel");
             var results = await query.Search();
@@ -21,7 +21,7 @@ namespace BreweryDB.Tests
         [Test()]
         public async void IncludeSocial()
         {
-            BreweryDBClient.Initialize(Keys.ApplicationKey, "BeerDrinkin");
+            BreweryDBClient.Initialize(Keys.ApplicationKey);
 
             var query = new BreweryDBSearch<Beer>("duvel")
             {
@@ -36,7 +36,7 @@ namespace BreweryDB.Tests
         [Test()]
         public async void ForBreweryByBeerName()
         {
-            BreweryDBClient.Initialize(Keys.ApplicationKey, "BeerDrinkin");
+            BreweryDBClient.Initialize(Keys.ApplicationKey);
 
             var query = new BreweryDBSearch<Brewery>("duvel");
             var results = await query.Search();

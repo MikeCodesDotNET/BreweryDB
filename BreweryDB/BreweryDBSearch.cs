@@ -6,15 +6,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http;
-using Akavache;
 using System.Reactive.Linq;
-using System.Text; 
+using System.Text;
 
 namespace BreweryDB
 {
     public class BreweryDBSearch<T>
     {
-        HttpClient httpClient; 
+        HttpClient httpClient;
 
         string searchTerm;
         SearchType type;
@@ -57,30 +56,30 @@ namespace BreweryDB
             parameters.Add(new KeyValuePair<string, string>("type", type.ToString().ToLower()));
 
 
-            if(withBreweries)
+            if (withBreweries)
                 parameters.Add(new KeyValuePair<string, string>("withBreweries", "y"));
 
-            if(withSocialAccounts)
+            if (withSocialAccounts)
                 parameters.Add(new KeyValuePair<string, string>("withSocialAccounts", "y"));
 
-            if(withGuilds)
+            if (withGuilds)
                 parameters.Add(new KeyValuePair<string, string>("withGuilds", "y"));
 
-            if(withLocations)
+            if (withLocations)
                 parameters.Add(new KeyValuePair<string, string>("withLocations", "y"));
 
-            if(withAlternateNames)
+            if (withAlternateNames)
                 parameters.Add(new KeyValuePair<string, string>("withAlternateNames", "y"));
 
-            if(withIngredients)
+            if (withIngredients)
                 parameters.Add(new KeyValuePair<string, string>("withIngredients", "y"));
 
             var url = string.Format("https://api.brewerydb.com/v2/search/?q={0}{1}", searchTerm, Helpers.ExtensionMethods.BuildParametersList(parameters));
 
             try
             {
-                var json = await BlobCache.LocalMachine.DownloadUrl(url, null, BreweryDBClient.UseCache, DateTimeOffset.Now.AddDays(BreweryDBClient.CacheValidateForDayCount));
-                var jsonString = Encoding.UTF8.GetString(json,0, json.Length);
+                var response = await httpClient.GetAsync(url);
+                var jsonString = await response.Content.ReadAsStringAsync();
 
                 model = JsonConvert.DeserializeObject<Models.Response>(jsonString);
                 model.Data = JsonConvert.DeserializeObject<IEnumerable<T>>(model.Data.ToString());
@@ -88,7 +87,7 @@ namespace BreweryDB
                 var beersToReturn = model.Data as IEnumerable<T>;
                 return beersToReturn;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -118,7 +117,7 @@ namespace BreweryDB
                 withGuilds = value;
             }
         }
-        
+
         public bool IncludeLocations
         {
             get

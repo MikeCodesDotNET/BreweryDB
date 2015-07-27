@@ -15,14 +15,10 @@ namespace BreweryDB
     {
         public static string ApplicationKey { get; private set; }
 
-        public static void Initialize(string applicationKey, string applicationName, double cacheValidateForDayCount = 3)
+        public static void Initialize(string applicationKey)
         {
-            BreweryDBClient.ApplicationKey = applicationKey;
-            Akavache.BlobCache.ApplicationName = applicationName;
-            CacheValidateForDayCount = cacheValidateForDayCount;
+            BreweryDBClient.ApplicationKey = applicationKey;        
         }
 
-        public static Double CacheValidateForDayCount {get; set;}
-        public static bool UseCache {get; set;}
     }
 }
