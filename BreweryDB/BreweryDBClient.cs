@@ -11,8 +11,9 @@ namespace BreweryDB
 {
     public class BreweryDBClient
     {
-        const string _apiKey = "";
-        public BreweryDBClient(string key = _apiKey)
+
+
+        public BreweryDBClient(string key)
         {
             _key = key;
         }
@@ -36,7 +37,7 @@ namespace BreweryDB
             return model.Data as Models.Beer;
         }
 
-        public ObservableCollection<Models.Beer> SearchForBeer(string name)
+        public async Task<List<Models.Beer>> SearchForBeer(string name)
         {
             try
             {
@@ -45,17 +46,17 @@ namespace BreweryDB
 
                 Models.Response model;
 
-                var url = string.Format("https://api.brewerydb.com/v2/search/?q={0}&key={1}&format=json", name, _key);
-                var response = _client.GetAsync(url).Result;
+                var url = string.Format("https://api.brewerydb.com/v2/search/?q={0}&withBreweries=y&key={1}&format=json", name, _key);
+                var response = await _client.GetAsync(url);
 
                 var jsonString = response.Content.ReadAsStringAsync();
                 jsonString.Wait();
                 model = JsonConvert.DeserializeObject<Models.Response>(jsonString.Result);
-                model.Data = JsonConvert.DeserializeObject<ObservableCollection<Models.Beer>>(model.Data.ToString());
+                model.Data = JsonConvert.DeserializeObject<List<Models.Beer>>(model.Data.ToString());
 
-                return model.Data as ObservableCollection<Models.Beer>;
+                return model.Data as List<Models.Beer>;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }

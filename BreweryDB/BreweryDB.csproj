@@ -39,17 +39,32 @@
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\Srm.cs" />
     <Compile Include="Models\Style.cs" />
+    <Compile Include="Models\Brewery.cs" />
+    <Compile Include="Models\Labels.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Images.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\SocialSite.cs" />
+    <Compile Include="Models\Adjuct.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\..\BeerDrinkin\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\BeerDrinkin\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <ItemGroup>
     <Reference Include="System.Runtime.Handles">
       <HintPath>packages\System.Runtime.Handles.4.0.0-beta-22816\lib\portable-wpa81+wp80+win80+net45+aspnetcore50\System.Runtime.Handles.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http">
-      <HintPath>packages\System.Net.Http.4.0.0-beta-22816\lib\portable-wpa81+wp80+win80+net45+aspnetcore50\System.Net.Http.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>packages\Newtonsoft.Json.6.0.8\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\..\BeerDrinkin\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\..\BeerDrinkin\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\..\BeerDrinkin\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
