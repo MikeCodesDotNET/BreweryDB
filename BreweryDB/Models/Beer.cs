@@ -25,24 +25,5 @@ namespace BreweryDB.Models
         public Srm Srm { get; set; }
         public Available Available { get; set; }
         public Style Style { get; set; }
-        public List<Brewery> Breweries {get; set;}
-        public Labels Labels {get; set;}
-        public string ServingTemperature {get; set;}
-
-       
-        public string Brewery
-        {
-            get
-            {
-                if (Breweries != null)
-                {
-                    return Breweries[0].Name;
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
     }
 }
