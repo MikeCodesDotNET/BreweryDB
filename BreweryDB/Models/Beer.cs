@@ -47,5 +47,7 @@ namespace BreweryDB.Models
         public Labels Labels { get; set; }
 
         public string ServingTemperature { get; set; }
+
+        public string Brewery { get; set; }
     }
 }

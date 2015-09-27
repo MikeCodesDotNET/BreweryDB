@@ -11,24 +11,28 @@ namespace BreweryDB
 {
     public class BreweryDBClient
     {
+        public static string ApplicationKey;
 
-
-        public BreweryDBClient(string key)
+        public static void Initialize(string apiKey)
         {
-            _key = key;
+            ApplicationKey = apiKey;
         }
 
-        public Models.Beer QueryBeerById(string id)
+        public BreweryDBClient()
+        {
+        }
+
+        public async Task<Models.Beer> QueryBeerById(string id)
         {
             if (_client == null)
                 _client = new HttpClient();
 
             Models.Response model;
 
-            var url = string.Format("https://api.brewerydb.com/v2/beer/{0}?key={1}&format=json", id, _key);
-            var task = _client.GetAsync(url);
+            var url = string.Format("https://api.brewerydb.com/v2/beer/{0}?key={1}&format=json", id, ApplicationKey);
+            var task = await _client.GetAsync(url);
 
-            var response = task.Result;
+            var response = task;
             var jsonString = response.Content.ReadAsStringAsync();
             jsonString.Wait();
             model = JsonConvert.DeserializeObject<Models.Response>(jsonString.Result);
@@ -46,7 +50,7 @@ namespace BreweryDB
 
                 Models.Response model;
 
-                var url = string.Format("https://api.brewerydb.com/v2/search/?q={0}&withBreweries=y&key={1}&format=json", name, _key);
+                var url = string.Format("https://api.brewerydb.com/v2/search/?q={0}&withBreweries=y&key={1}&format=json", name, ApplicationKey);
                 var response = await _client.GetAsync(url);
 
                 var jsonString = response.Content.ReadAsStringAsync();
@@ -62,7 +66,32 @@ namespace BreweryDB
             }
         }
 
+        public async Task<List<Models.Brewery>> SearchForBrewery(string name)
+        {
+            try
+            {
+                if (_client == null)
+                    _client = new HttpClient();
+
+                Models.Response model;
+
+                var url = string.Format("https://api.brewerydb.com/v2/breweries/?q={0}&key={1}&format=json", name, ApplicationKey);
+                var response = await _client.GetAsync(url);
+
+                var jsonString = response.Content.ReadAsStringAsync();
+                jsonString.Wait();
+                model = JsonConvert.DeserializeObject<Models.Response>(jsonString.Result);
+                model.Data = JsonConvert.DeserializeObject<List<Models.Beer>>(model.Data.ToString());
+
+                return model.Data as List<Models.Brewery>;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
         private HttpClient _client;
-        private string _key;
     }
 }
