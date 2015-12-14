@@ -14,6 +14,9 @@ BreweryDB is your database of breweries, beers, beer events and guilds!
 * Categories
 * Events
 * Features
+* Fermentables
+* Fluidsize
+* Guilds
 * SocialSites
 * Yeasts
 
