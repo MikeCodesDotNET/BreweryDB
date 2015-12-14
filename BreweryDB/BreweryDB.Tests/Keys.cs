@@ -4,7 +4,7 @@ namespace BreweryDB.Tests
 {
     public class Keys
     {
-        public static string ApplicationKey = "716ab38546fdfc49d75964861f413b6f";
+        public static string ApplicationKey = "a956af587b434c4c89ef18c7bbd2fac9";
     }
 }
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -10,6 +10,10 @@
     <AssemblyName>BreweryDB</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\BeerDrinkin\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +34,41 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ConcreteConverter.cs" />
+    <Compile Include="Helpers\JsonDownloader.cs" />
+    <Compile Include="Helpers\NameValueCollection.cs" />
+    <Compile Include="Interfaces\IAdjunct.cs" />
+    <Compile Include="Interfaces\IAvailability.cs" />
+    <Compile Include="Interfaces\IBase.cs" />
+    <Compile Include="Interfaces\IBeer.cs" />
+    <Compile Include="Interfaces\IBrewery.cs" />
+    <Compile Include="Interfaces\ICategory.cs" />
+    <Compile Include="Interfaces\ICountry.cs" />
+    <Compile Include="Interfaces\IEvent.cs" />
+    <Compile Include="Interfaces\IFeature.cs" />
+    <Compile Include="Interfaces\IGlass.cs" />
+    <Compile Include="Interfaces\IImages.cs" />
+    <Compile Include="Interfaces\ILabels.cs" />
+    <Compile Include="Interfaces\ILocation.cs" />
+    <Compile Include="Interfaces\ISocialAccount.cs" />
+    <Compile Include="Interfaces\ISocialMedia.cs" />
+    <Compile Include="Interfaces\ISocialSite.cs" />
+    <Compile Include="Interfaces\ISrm.cs" />
+    <Compile Include="Interfaces\IStyle.cs" />
+    <Compile Include="Interfaces\IYeast.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\Feature.cs" />
+    <Compile Include="Models\RequestParameters\EventRequestParameters.cs" />
+    <Compile Include="Models\SocialSite.cs" />
+    <Compile Include="Resources\EventResource.cs" />
+    <Compile Include="Resources\SocialSiteResource.cs" />
+    <Compile Include="Resources\FeatureResource.cs" />
+    <Compile Include="Resources\YeastResource.cs" />
+    <Compile Include="Models\Error.cs" />
+    <Compile Include="Models\RequestParameters\BeerRequestParameters.cs" />
+    <Compile Include="Models\RequestParameters\BreweryRequestParameters.cs" />
+    <Compile Include="Models\SocialAccount.cs" />
+    <Compile Include="Models\Yeast.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BreweryDBClient.cs" />
     <Compile Include="Models\Available.cs" />
@@ -38,47 +77,47 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Glass.cs" />
-    <Compile Include="Models\Images.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Labels.cs" />
     <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\ResponseContainer.cs" />
     <Compile Include="Models\Srm.cs" />
     <Compile Include="Models\Style.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
-    <Compile Include="Enums\Status.cs" />
     <Compile Include="Models\Adjunct.cs" />
-    <Compile Include="BreweryDBQuery.cs" />
     <Compile Include="Models\Page.cs" />
-    <Compile Include="Enums\BeerRequestParameters.cs" />
-    <Compile Include="BreweryDBSearch.cs" />
-    <Compile Include="Enums\SearchType.cs" />
-    <Compile Include="Models\SocialSite.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Import Project="packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Enums\" />
+    <Compile Include="Models\SocialMedia.cs" />
+    <Compile Include="Resources\BeerResource.cs" />
+    <Compile Include="Resources\BreweryResource.cs" />
+    <Compile Include="Resources\AdjuectResource.cs" />
+    <Compile Include="Resources\CategoryResource.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Net.Http">
-      <HintPath>..\..\BeerDrinkin\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Net.Http.Primitives">
-      <HintPath>..\..\BeerDrinkin\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
+    <Reference Include="System.Net.Http, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Net.Http.Extensions">
-      <HintPath>..\..\BeerDrinkin\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll</HintPath>
+    <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.7.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\..\BeerDrinkin\packages\Rx-Interfaces.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.Interfaces.dll</HintPath>
+    <Reference Include="System.Net.Http.Primitives, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
 </Project>

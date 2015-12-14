@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Collections.Generic;
 using System.Text;
 
 namespace BreweryDB.Helpers
 {
     public static class ExtensionMethods
     {
-        public static int Remove<T>(
-            this ObservableCollection<T> coll, Func<T, bool> condition)
+        public static int Remove<T>(this ObservableCollection<T> coll, Func<T, bool> condition)
         {
             var itemsToRemove = coll.Where(condition).ToList();
 
@@ -21,10 +20,9 @@ namespace BreweryDB.Helpers
             return itemsToRemove.Count;
         }
 
-        public static void RemoveAll<T>(this ObservableCollection<T> collection,
-            Func<T, bool> condition)
+        public static void RemoveAll<T>(this ObservableCollection<T> collection, Func<T, bool> condition)
         {
-            for (int i = collection.Count - 1; i >= 0; i--)
+            for (var i = collection.Count - 1; i >= 0; i--)
             {
                 if (condition(collection[i]))
                 {
@@ -33,24 +31,21 @@ namespace BreweryDB.Helpers
             }
         }
 
-        public static string BuildParametersList(IEnumerable<KeyValuePair<string, string>> parameters)
+        public static string UppercaseFirst(this string s)
         {
-            if (parameters == null)
-                throw new ArgumentNullException("parameters");
+            if (string.IsNullOrEmpty(s))
+                return string.Empty;
+            
+            return char.ToUpper(s[0]) + s.Substring(1);
+        }
 
-            var stringBuilder = new StringBuilder();
+        public static string LowercaseFirst(this string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return string.Empty;
 
-            foreach (var parameter in parameters)
-            {
-                stringBuilder.Append(string.Concat("&", parameter.Key, "=", parameter.Value));
-            }
-
-            stringBuilder.Append(string.Concat("&", "key", "=", BreweryDBClient.ApplicationKey));
-            stringBuilder.Append(string.Concat("&", "format", "=", "json"));
-
-            return stringBuilder.ToString();
+            return char.ToLower(s[0]) + s.Substring(1);
         }
 
     }
 }
-

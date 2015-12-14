@@ -1,8 +1,10 @@
-﻿using System;
+﻿using BreweryDB.Helpers;
+using BreweryDB.Interfaces;
+using Newtonsoft.Json;
 
 namespace BreweryDB.Models
 {
-    public class Location
+    public class Location : ILocation
     {
         public string Id { get; set; }
         public string Mame { get; set; }
@@ -17,7 +19,9 @@ namespace BreweryDB.Models
         public string StatusDisplay { get; set; }
         public string CreateDate { get; set; }
         public string UpdateDate { get; set; }
-        public Country Country { get; set; }
+
+        [JsonConverter(typeof(ConcreteConverter<Country>))]
+        public ICountry Country { get; set; }
         public string StreetAddress { get; set; }
         public string Locality { get; set; }
         public string Region { get; set; }
@@ -28,6 +32,7 @@ namespace BreweryDB.Models
         public string Website { get; set; }
         public string HoursOfOperation { get; set; }
         public string YearOpened { get; set; }
+        public string OpenTo { get; set; }
+
     }
 }
-

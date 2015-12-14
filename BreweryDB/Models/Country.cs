@@ -1,10 +1,10 @@
-﻿using System;
+﻿using BreweryDB.Interfaces;
 
 namespace BreweryDB.Models
 {
-    public class Country
+    public class Country : ICountry
     {
-        public string IsoCode { get; set; }
+        public string CountryIsoCode { get; set; }
         public string Name { get; set; }
         public string DisplayName { get; set; }
         public string IsoThree { get; set; }
@@ -12,4 +12,3 @@ namespace BreweryDB.Models
         public string CreateDate { get; set; }
     }
 }
-

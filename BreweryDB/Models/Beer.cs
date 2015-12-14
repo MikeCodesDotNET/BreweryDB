@@ -1,64 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BreweryDB.Interfaces;
 using Newtonsoft.Json;
 
 namespace BreweryDB.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
-    public class Beer
+    public class Beer  : IBeer
     {
-        [JsonProperty("id")]
+
+        public Beer(Glass glass, Srm srm, Available available, Style style, List<Brewery> breweries, Images labels,
+            List<SocialAccount> socialAccounts)
+        {
+            Glass = glass;
+            Srm = srm;
+            Available = available;
+            Style = style;
+            Breweries = breweries;
+            Labels = labels;
+
+        } 
+
         public string Id { get; set; }
-
-        [JsonProperty("name")]
         public string Name { get; set; }
-
-        [JsonProperty("description")]
+        public string NameDisplay { get; set; }
         public string Description { get; set; }
-
-        [JsonProperty("abv")]
-        public string Abv { get; set; }
-
-        [JsonProperty("glasswareId")]
+        public double Abv { get; set; }
         public int GlasswareId { get; set; }
-
-        [JsonProperty("srmId")]
         public int SrmId { get; set; }
-
-        [JsonProperty("availableId")]
         public int AvailableId { get; set; }
-
-        [JsonProperty("styleId")]
         public int StyleId { get; set; }
         public string IsOrganic { get; set; }
         public string Status { get; set; }
         public string StatusDisplay { get; set; }
         public string CreateDate { get; set; }
         public string UpdateDate { get; set; }
-        public Glass Glass { get; set; }
-        public Srm Srm { get; set; }
-        public Available Available { get; set; }
-        public Style Style { get; set; }
-        public List<Brewery> Breweries {get; set;}
-        public Labels Labels {get; set;}
-        public string ServingTemperature {get; set;}
-           
-        public string Brewery
-        {
-            get
-            {
-                if (Breweries != null)
-                {
-                    return Breweries[0].Name;
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
+        public IGlass Glass { get; set; }
+        public ISrm Srm { get; set; }
+        public IAvailable Available { get; set; }
+        public IStyle Style { get; set; }
+        public List<Brewery> Breweries { get; set; }
+        public IImages Labels { get; set; }
+        public List<ISocialAccount> SocialAccounts  { get; set; }
+        public string ServingTemperature { get; set; }
+
+        public string Brewery => Breweries != null ? Breweries[0].Name : string.Empty;
+         
+        
     }
 }
