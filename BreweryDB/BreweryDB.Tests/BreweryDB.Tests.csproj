@@ -39,6 +39,7 @@
     <Compile Include="Features.cs" />
     <Compile Include="Guilds.cs" />
     <Compile Include="Fermentables.cs" />
+    <Compile Include="FluidSizes.cs" />
     <Compile Include="Yeasts.cs" />
     <Compile Include="Adjuncts.cs" />
     <Compile Include="Categories.cs" />
