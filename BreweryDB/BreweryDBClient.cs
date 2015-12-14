@@ -19,6 +19,7 @@ namespace BreweryDB
             SocialSites = new SocialSiteResource(this);
             Events = new EventResource(this);
             Features = new FeatureResource(this);
+            Guildes = new GuildResource(this);
         }
 
         public AdjunctResource Adjuncts { get; private set; }
@@ -29,5 +30,6 @@ namespace BreweryDB
         public SocialSiteResource SocialSites { get; set; }
         public EventResource Events { get; set; }
         public FeatureResource Features { get; set; }
+        public GuildResource Guildes { get; set; }
     }
 }

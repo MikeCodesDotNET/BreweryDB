@@ -47,6 +47,7 @@
     <Compile Include="Interfaces\IEvent.cs" />
     <Compile Include="Interfaces\IFeature.cs" />
     <Compile Include="Interfaces\IGlass.cs" />
+    <Compile Include="Interfaces\IGuild.cs" />
     <Compile Include="Interfaces\IImages.cs" />
     <Compile Include="Interfaces\ILabels.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
@@ -58,11 +59,13 @@
     <Compile Include="Interfaces\IYeast.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Feature.cs" />
+    <Compile Include="Models\Guild.cs" />
     <Compile Include="Models\RequestParameters\EventRequestParameters.cs" />
     <Compile Include="Models\SocialSite.cs" />
     <Compile Include="Resources\EventResource.cs" />
     <Compile Include="Resources\SocialSiteResource.cs" />
     <Compile Include="Resources\FeatureResource.cs" />
+    <Compile Include="Resources\GuildResource.cs" />
     <Compile Include="Resources\YeastResource.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\RequestParameters\BeerRequestParameters.cs" />
