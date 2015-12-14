@@ -75,5 +75,20 @@ namespace BreweryDB.Tests
             Assert.IsTrue(_event.Year == "2008");
         }
 
+        [Test()]
+        public async void Search()
+        {
+            var response = await client.Events.Search("B'dam BrewJAM");
+
+            Assert.IsTrue(response.Status == "success");
+            Assert.IsTrue(response.CurrentPage == 1);
+            Assert.IsTrue(response.NumberOfPages >= 1);
+            Assert.IsTrue(response.TotalResults >= 36);
+
+            var _event = response.Data.FirstOrDefault();
+            Assert.IsTrue(_event?.Id == "cJio9R");
+            Assert.IsTrue(_event.Name == "Brewers Association");
+        }
+
     }
 }

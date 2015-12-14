@@ -73,5 +73,20 @@ namespace BreweryDB.Tests
             Assert.IsTrue(beer?.Id == "aJQnv0");
             Assert.IsTrue(beer.Name == "Ad Lib Brewing Company");
         }
+
+        [Test()]
+        public async void Search()
+        {
+            var response = await client.Breweries.Search("duvel");
+
+            Assert.IsTrue(response.Status == "success");
+            Assert.IsTrue(response.CurrentPage == 1);
+            Assert.IsTrue(response.NumberOfPages >= 1);
+            Assert.IsTrue(response.TotalResults >= 2);
+
+            var brewery = response.Data.FirstOrDefault();
+            Assert.IsTrue(brewery?.Id == "fO5IlN");
+            Assert.IsTrue(brewery.Name == "Brouwerij Duvel Moortgat");
+        }
     }
 }

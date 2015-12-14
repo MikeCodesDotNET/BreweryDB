@@ -49,6 +49,12 @@ namespace BreweryDB.Resources
             return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Event>>>(url);
         }
 
+        async public Task<ResponseContainer<List<Event>>> Search(string keyword)
+        {
+            var url = $"{BreweryDbClient.BaseAddress}search?q={keyword}&type=event&withBreweries=y&withSocialAccounts=y&withGuilds=y&withLocations=y&withAlternateNames=y&withIngredients=y&key={BreweryDbClient.ApplicationKey}&format=json";
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Event>>>(url);
+        }
+
     }
 }
 

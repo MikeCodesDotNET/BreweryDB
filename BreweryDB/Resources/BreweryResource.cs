@@ -46,5 +46,11 @@ namespace BreweryDB.Resources
             var url = $"{BreweryDbClient.BaseAddress}breweries?{parameterBuilder}key={BreweryDbClient.ApplicationKey}&format=json";
             return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Brewery>>>(url);
         }
+
+        async public Task<ResponseContainer<List<Brewery>>> Search(string keyword)
+        {
+            var url = $"{BreweryDbClient.BaseAddress}search?q={keyword}&type=brewery&withSocialAccounts=y&withGuilds=y&withLocations=y&withAlternateNames=y&withIngredients=y&key={BreweryDbClient.ApplicationKey}&format=json";
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Brewery>>>(url);
+        }
     }
 }

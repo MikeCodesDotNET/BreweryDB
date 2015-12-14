@@ -53,5 +53,20 @@ namespace BreweryDB.Tests
             Assert.IsTrue(guild.Id == "E8C6fp");
             Assert.IsTrue(guild.Name == "St. Louis Brewers Guild");
         }
+
+        [Test()]
+        public async void Search()
+        {
+            var response = await client.Guildes.Search("Alabama Brewers Guild");
+
+            Assert.IsTrue(response.Status == "success");
+            Assert.IsTrue(response.CurrentPage == 1);
+            Assert.IsTrue(response.NumberOfPages >= 1);
+            Assert.IsTrue(response.TotalResults >= 59);
+
+            var guild = response.Data.FirstOrDefault();
+            Assert.IsTrue(guild?.Id == "EdRcIs");
+            Assert.IsTrue(guild.Name == "Alabama Brewers Guild");
+        }
     }
 }
