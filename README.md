@@ -48,7 +48,32 @@ var response = await client.Beers.Get(parameters);
 
 ####Search for beer
 ```c#
-var response = await client.Breweries.Search("duvel");
+var response = await client.Beer.Search("duvel");
 ```
 
+###Breweries
+####Fetch brewery by id
+```c#
+var response = await client.Breweries.Get("YXDiJk");
+```
+
+####Fetch all brewery
+```c#
+//Returns first page (50 beers per page)
+var response = await client.Breweries.GetAll();
+
+//Returns third page (50 beers per page)
+var response = await client.Breweries.GetAll(4);
+```
+
+####Fetch brewery with parameter
+```c#
+var parameters = new Helpers.NameValueCollection {{BreweryRequestParameters.Name, "Ad Lib Brewing Company" } };
+var response = await client.Breweries.Get(parameters);
+```
+
+####Search for brewery
+```c#
+var response = await client.Breweries.Search("duvel");
+```
 
