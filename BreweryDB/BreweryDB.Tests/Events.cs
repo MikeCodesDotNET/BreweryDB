@@ -83,11 +83,11 @@ namespace BreweryDB.Tests
             Assert.IsTrue(response.Status == "success");
             Assert.IsTrue(response.CurrentPage == 1);
             Assert.IsTrue(response.NumberOfPages >= 1);
-            Assert.IsTrue(response.TotalResults >= 36);
+            Assert.IsTrue(response.TotalResults >= 1);
 
             var _event = response.Data.FirstOrDefault();
-            Assert.IsTrue(_event?.Id == "cJio9R");
-            Assert.IsTrue(_event.Name == "Brewers Association");
+            Assert.IsTrue(_event?.Id == "28OVyf");
+            Assert.IsTrue(_event.Name == "B'dam BrewJAM");
         }
 
     }
