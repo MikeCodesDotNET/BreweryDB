@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using BreweryDB.Interfaces;
 
 namespace BreweryDB.Models
 {
-    public class Srm
+    public class Srm : ISrm
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Hex { get; set; }
     }

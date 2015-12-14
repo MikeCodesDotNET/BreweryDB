@@ -10,6 +10,9 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Packages
+[Pp]ackages/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -24,6 +27,9 @@ bld/
 
 # Visual Studo 2015 cache/options directory
 .vs/
+
+#Components
+[C]omponents/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -61,7 +67,8 @@ dlldata.c
 .builds
 *.pidb
 *.svclog
-*.scc
+*.sc
+*.dll
 
 # Chutzpah Test files
 _Chutzpah*
@@ -196,3 +203,5 @@ FakesAssemblies/
 *.opt
 
 Mobile/Helpers/Keys.cs
+
+Shared/BeerDrinkin/Helpers/Keys.cs

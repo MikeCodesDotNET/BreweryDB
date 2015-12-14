@@ -2,10 +2,11 @@
 
 namespace BreweryDB.Models
 {
-    public class SocialSite : ISocialSite
+    public class Yeast : IYeast
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Website { get; set; }
+        public string Category { get; set; }
+        public string CategoryDisplay { get; set; }
     }
 }

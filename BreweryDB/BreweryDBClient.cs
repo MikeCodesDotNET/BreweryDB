@@ -1,97 +1,60 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using BreweryDB.Models;
+using BreweryDB.Resources;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace BreweryDB
 {
-    public class BreweryDBClient
+    public class BreweryDbClient
     {
-        public static string ApplicationKey;
-
-        public static void Initialize(string apiKey)
+        public static string ApplicationKey { get; private set; }
+        public static readonly string BaseAddress = "https://api.brewerydb.com/v2/";
+        private readonly HttpClient client;
+        
+        public BreweryDbClient(string key)
         {
-            ApplicationKey = apiKey;
+            ApplicationKey = key;
+            client = new HttpClient();
+
+            Beers = new BeerResource(this);
+            Breweries = new BreweryResource(this);
+            Categories = new CategoryResource(this);
+            Adjuncts = new AdjunctResource(this);
+            Yeasts = new YeastResource(this);
+            SocialSites = new SocialSiteResource(this);
+            Events = new EventResource(this);
+            Features = new FeatureResource(this);
         }
 
-        public BreweryDBClient()
+        public AdjunctResource Adjuncts { get; private set; }
+        public BeerResource Beers { get; private set; }
+        public BreweryResource Breweries { get; private set; }
+        public CategoryResource Categories { get; private set; }
+        public YeastResource Yeasts { get; private set; }
+        public SocialSiteResource SocialSites { get; set; }
+        public EventResource Events { get; set; }
+        public FeatureResource Features { get; set; }
+
+        internal async Task<string> FetchJson(string url)
         {
-        }
-
-        public async Task<Models.Beer> QueryBeerById(string id)
-        {
-            if (_client == null)
-                _client = new HttpClient();
-
-            Models.Response model;
-
-            var url = string.Format("https://api.brewerydb.com/v2/beer/{0}?key={1}&format=json", id, ApplicationKey);
-            var task = await _client.GetAsync(url);
-
-            var response = task;
+            var response = await client.GetAsync(url);
             var jsonString = response.Content.ReadAsStringAsync();
             jsonString.Wait();
-            model = JsonConvert.DeserializeObject<Models.Response>(jsonString.Result);
-            model.Data = JsonConvert.DeserializeObject<Models.Beer>(model.Data.ToString());
 
-            return model.Data as Models.Beer;
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                var error = JsonConvert.DeserializeObject<Error>(jsonString.Result, new JsonSerializerSettings());
+                throw error == null
+                    ? new UnauthorizedAccessException(
+                        $"Failed to authorize with BreweryDB. This is most likely due to an invalud URL. {url}")
+                    : new UnauthorizedAccessException(
+                        $"Error to authorize with BreweryDB. Returned error message : {error.Message}\r\n URL: {url} ");
+            }
+
+            return jsonString.Result;
         }
-
-        public async Task<List<Models.Beer>> SearchForBeer(string name)
-        {
-            try
-            {
-                if (_client == null)
-                    _client = new HttpClient();
-
-                Models.Response model;
-
-                var url = string.Format("https://api.brewerydb.com/v2/search/?q={0}&withBreweries=y&key={1}&format=json", name, ApplicationKey);
-                var response = await _client.GetAsync(url);
-
-                var jsonString = response.Content.ReadAsStringAsync();
-                jsonString.Wait();
-                model = JsonConvert.DeserializeObject<Models.Response>(jsonString.Result);
-                model.Data = JsonConvert.DeserializeObject<List<Models.Beer>>(model.Data.ToString());
-
-                return model.Data as List<Models.Beer>;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
-        public async Task<List<Models.Brewery>> SearchForBrewery(string name)
-        {
-            try
-            {
-                if (_client == null)
-                    _client = new HttpClient();
-
-                Models.Response model;
-
-                var url = string.Format("https://api.brewerydb.com/v2/breweries/?q={0}&key={1}&format=json", name, ApplicationKey);
-                var response = await _client.GetAsync(url);
-
-                var jsonString = response.Content.ReadAsStringAsync();
-                jsonString.Wait();
-                model = JsonConvert.DeserializeObject<Models.Response>(jsonString.Result);
-                model.Data = JsonConvert.DeserializeObject<List<Models.Beer>>(model.Data.ToString());
-
-                return model.Data as List<Models.Brewery>;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
-
-        private HttpClient _client;
     }
 }
