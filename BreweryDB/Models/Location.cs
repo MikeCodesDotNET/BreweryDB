@@ -32,13 +32,9 @@ namespace BreweryDB.Models
 
         public string UpdateDate { get; set; }
 
-<<<<<<< HEAD
-        public Country Country { get; set; }
-
-=======
         [JsonConverter(typeof(ConcreteConverter<Country>))]
         public ICountry Country { get; set; }
->>>>>>> RemoveCaching
+
         public string StreetAddress { get; set; }
 
         public string Locality { get; set; }
