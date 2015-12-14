@@ -46,4 +46,9 @@ var parameters = new NameValueCollection {{BeerRequestParameters.Name, "duvel si
 var response = await client.Beers.Get(parameters);
 ```
 
+####Search for beer
+```c#
+var response = await client.Breweries.Search("duvel");
+```
+
 
