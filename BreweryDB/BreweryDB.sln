@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreweryDB", "BreweryDB.csproj", "{84D549C9-B9CA-4C37-8C99-2C12DB8906B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreweryDB.Tests", "BreweryDB.Tests\BreweryDB.Tests.csproj", "{20793B1C-A49F-43BE-8D83-15C2453E4CDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,5 +17,12 @@ Global
 		{84D549C9-B9CA-4C37-8C99-2C12DB8906B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84D549C9-B9CA-4C37-8C99-2C12DB8906B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84D549C9-B9CA-4C37-8C99-2C12DB8906B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20793B1C-A49F-43BE-8D83-15C2453E4CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20793B1C-A49F-43BE-8D83-15C2453E4CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20793B1C-A49F-43BE-8D83-15C2453E4CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20793B1C-A49F-43BE-8D83-15C2453E4CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
