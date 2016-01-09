@@ -2,8 +2,8 @@
 {
     public interface ILabels 
     {
-        string Icon { get; }
-        string Medium { get; }
-        string Large { get; }
+        string Icon { get; set;}
+        string Medium { get; set; }
+        string Large { get; set; }
     }
 }

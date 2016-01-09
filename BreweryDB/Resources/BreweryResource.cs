@@ -6,7 +6,7 @@ using BreweryDB.Models;
 
 namespace BreweryDB.Resources
 {
-    public class BreweryResource
+    public class BreweryResource<T>
     {
         private readonly BreweryDbClient client;
 
@@ -15,24 +15,24 @@ namespace BreweryDB.Resources
             client = breweryDbClient;
         }
 
-        async public Task<ResponseContainer<List<Brewery>>> GetAll()
+        public async Task<ResponseContainer<List<T>>> GetAll()
         {
             return await GetAll(1);
         }
 
-        async public Task<ResponseContainer<List<Brewery>>> GetAll(int pageNumber)
+        public async Task<ResponseContainer<List<T>>> GetAll(int pageNumber)
         {
             var url = $"{BreweryDbClient.BaseAddress}breweries?p={pageNumber}&key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Brewery>>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);
         }
 
-        async public Task<ResponseContainer<Brewery>> Get(string id)
+        public async Task<ResponseContainer<T>> Get(string id)
         {
             var url = $"{BreweryDbClient.BaseAddress}brewery/{id}?key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<Brewery>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<T>>(url);
         }
 
-        async public Task<ResponseContainer<List<Brewery>>> Get(NameValueCollection nvc)
+        public async Task<ResponseContainer<List<T>>> Get(NameValueCollection nvc)
         {
             var parameterBuilder = new StringBuilder();
             foreach (var parameter in nvc)
@@ -44,13 +44,13 @@ namespace BreweryDB.Resources
             }
 
             var url = $"{BreweryDbClient.BaseAddress}breweries?{parameterBuilder}key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Brewery>>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);
         }
 
-        async public Task<ResponseContainer<List<Brewery>>> Search(string keyword)
+        public async Task<ResponseContainer<List<T>>> Search(string keyword)
         {
             var url = $"{BreweryDbClient.BaseAddress}search?q={keyword}&type=brewery&withSocialAccounts=y&withGuilds=y&withLocations=y&withAlternateNames=y&withIngredients=y&key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Brewery>>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);
         }
     }
 }

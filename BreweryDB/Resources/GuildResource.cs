@@ -5,7 +5,7 @@ using BreweryDB.Models;
 
 namespace BreweryDB.Resources
 {
-    public class GuildResource
+    public class GuildResource<T>
     {
         private readonly BreweryDbClient client;
 
@@ -14,27 +14,27 @@ namespace BreweryDB.Resources
             client = breweryDbClient;
         }
 
-        async public Task<ResponseContainer<List<Guild>>> GetAll()
+        public async Task<ResponseContainer<List<T>>> GetAll()
         {
             return await GetAll(1);
         }
 
-        async public Task<ResponseContainer<List<Guild>>> GetAll(int pageNumber)
+        public async Task<ResponseContainer<List<T>>> GetAll(int pageNumber)
         {
             var url = $"{BreweryDbClient.BaseAddress}guilds?p={pageNumber}&key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Guild>>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);
         }
 
-        async public Task<ResponseContainer<Guild>> Get(string id)
+        public async Task<ResponseContainer<T>> Get(string id)
         {
             var url = $"{BreweryDbClient.BaseAddress}guild/{id}?key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<Guild>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<T>>(url);
         }
 
-        async public Task<ResponseContainer<List<Guild>>> Search(string keyword)
+        public async Task<ResponseContainer<List<T>>> Search(string keyword)
         {
             var url = $"{BreweryDbClient.BaseAddress}search?q={keyword}&type=guild&withBreweries=y&withSocialAccounts=y&withGuilds=y&withLocations=y&withAlternateNames=y&withIngredients=y&key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Guild>>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);
         }
     }
 }

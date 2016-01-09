@@ -6,7 +6,7 @@ using BreweryDB.Models;
 
 namespace BreweryDB.Resources
 {
-    public class FeatureResource
+    public class FeatureResource<T>
     {
         private readonly BreweryDbClient client;
 
@@ -15,24 +15,24 @@ namespace BreweryDB.Resources
             client = breweryDbClient;
         }
 
-        async public Task<ResponseContainer<Feature>> ThisWeeks()
+        public async Task<ResponseContainer<T>> ThisWeeks()
         {
             var url = $"{BreweryDbClient.BaseAddress}featured?key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<Feature>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<T>>(url);
         }
 
-        async public Task<ResponseContainer<List<Feature>>> GetAll()
+        public async Task<ResponseContainer<List<T>>> GetAll()
         {
             return await GetAll(1);
         }
 
-        async public Task<ResponseContainer<List<Feature>>> GetAll(int pageNumber)
+        public async Task<ResponseContainer<List<T>>> GetAll(int pageNumber)
         {
             var url = $"{BreweryDbClient.BaseAddress}features?p={pageNumber}&key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Feature>>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);
         }
 
-        async public Task<ResponseContainer<Feature>> Get(DateTime date)
+        public async Task<ResponseContainer<T>> Get(DateTime date)
         {
             string week = date.Month.ToString();
             if(week.Length == 1)
@@ -43,7 +43,7 @@ namespace BreweryDB.Resources
             var year = date.Year;
 
             var url = $"{BreweryDbClient.BaseAddress}feature/{year}-{week}?key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<Feature>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<T>>(url);
         }
     }
 }

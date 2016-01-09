@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using BreweryDB.Interfaces;
-using Newtonsoft.Json;
+using BreweryDB.Models;
 
-namespace BreweryDB.Models
+namespace BreweryDB.Tests.Models
 {
-    public class Beer  : IBeer
+    public class MyBeer  : IBeer
     {
-        public Beer(Glass glass, Srm srm, Available available, Style style, List<Brewery> breweries, Labels labels,
+        public MyBeer(Glass glass, Srm srm, Available available, Style style, List<Brewery> breweries, Labels labels,
             List<SocialAccount> socialAccounts)
         {
             Glass = glass;
@@ -16,7 +16,6 @@ namespace BreweryDB.Models
             Style = style;
             Breweries = breweries;
             Labels = labels;
-
         } 
 
         public string Id { get; set; }

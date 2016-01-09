@@ -5,7 +5,7 @@ using BreweryDB.Models;
 
 namespace BreweryDB.Resources
 {
-    public class FluidSizeResource
+    public class FluidSizeResource<T>
     {
         private readonly BreweryDbClient client;
 
@@ -14,16 +14,16 @@ namespace BreweryDB.Resources
             client = breweryDbClient;
         }
 
-        async public Task<ResponseContainer<List<FluidSize>>> GetAll()
+        public async Task<ResponseContainer<List<T>>> GetAll()
         {
             var url = $"{BreweryDbClient.BaseAddress}fluidsizes?key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<FluidSize>>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);
         }
 
-        async public Task<ResponseContainer<FluidSize>> Get(string id)
+        public async Task<ResponseContainer<T>> Get(string id)
         {
             var url = $"{BreweryDbClient.BaseAddress}fluidsize/{id}?key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<FluidSize>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<T>>(url);
         }
     }
 }

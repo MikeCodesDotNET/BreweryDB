@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using BreweryDB.Helpers;
 using BreweryDB.Models;
 using BreweryDB.Models.RequestParameters;
+using BreweryDB.Resources;
+using BreweryDB.Tests.Models;
 using NUnit.Framework;
 
 namespace BreweryDB.Tests
@@ -42,6 +44,12 @@ namespace BreweryDB.Tests
             Assert.IsTrue(beer.Available.Name == "Year Round");
             Assert.IsTrue(beer.Available.Description == "Available year round as a staple beer.");
 
+            //Brewery
+            Assert.IsTrue(beer.Brewery == "Ship Bottom Brewery");
+            var brewery = beer.Breweries?.FirstOrDefault();
+            Assert.IsTrue(brewery.Description.Contains("Our humble beginnings started in the Summer of 1995") == true);
+            Assert.IsTrue(brewery.Id == "qa1QZU");
+
             //Style
             Assert.IsTrue(beer.StyleId == 43);
             Assert.IsTrue(beer.Style.Id == "43");
@@ -74,9 +82,9 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetAll()
+        public void GetAll()
         {
-            var response = await client.Beers.GetAll();
+            var response = client.Beers.GetAll().Result;
 
             Assert.IsTrue(response.Status == "success");
             Assert.IsTrue(response.CurrentPage == 1);
@@ -88,6 +96,9 @@ namespace BreweryDB.Tests
             Assert.IsTrue(beer.NameDisplay == "\"18\" Imperial IPA 2");
             Assert.IsTrue(beer.Description == "Hop Heads this one's for you!  Checking in with 143 IBU's this ale punches you in the mouth with extreme bitterness then rounds out with toffee flavors and finishes with a citrus aroma.  Made with tons of US 2 Row Barley to get this to ABV 11.1%.");
             Assert.IsTrue(beer.Abv == 11.1);
+
+            //Breweries
+            Assert.IsTrue(beer.Breweries != null);
 
             //SRM
             Assert.IsTrue(beer.SrmId == 33);
@@ -173,8 +184,36 @@ namespace BreweryDB.Tests
             Assert.IsTrue(response.TotalResults >= 6);
 
             var beer = response.Data.FirstOrDefault();
-            Assert.IsTrue(beer?.Id == "ziYa5r");
-            Assert.IsTrue(beer.Name == "Duvel Rustica");
+            Assert.IsTrue(beer?.Id == "tAmjew");
+            Assert.IsTrue(beer.Name == "Duvel Green");
+        }
+
+        [Test()]
+        public async void CustomType()
+        {
+            var newClient = new BreweryDbClient(Keys.ApplicationKey);
+            var Beers = new BeerResource<MyBeer>(newClient);
+            
+            var response = await Beers.GetAll();
+            
+            Assert.IsTrue(response.Status == "success");
+            Assert.IsTrue(response.CurrentPage == 1);
+            Assert.IsTrue(response.NumberOfPages >= 1);
+            Assert.IsTrue(response.TotalResults >= 1019);
+
+            var beer = response.Data.FirstOrDefault();
+            Assert.IsTrue(beer?.Id == "cBLTUw");
+        }
+
+        [Test()]
+        public async void HasImages()
+        {
+            var response = await client.Beers.Search("Stella");
+
+            Assert.IsTrue(response.Status == "success");
+
+            var beer = response.Data.FirstOrDefault(x => x.Id == "Jc7iGI");
+            Assert.IsNotNull(beer.Labels);
         }
     }
 }

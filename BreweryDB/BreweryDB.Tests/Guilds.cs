@@ -50,8 +50,7 @@ namespace BreweryDB.Tests
             Assert.IsTrue(response.Status == "success");
 
             var guild = response.Data.FirstOrDefault();
-            Assert.IsTrue(guild.Id == "E8C6fp");
-            Assert.IsTrue(guild.Name == "St. Louis Brewers Guild");
+            Assert.IsNotNull(guild);
         }
 
         [Test()]

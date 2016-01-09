@@ -1,4 +1,6 @@
-﻿using BreweryDB.Resources;
+﻿using BreweryDB.Interfaces;
+using BreweryDB.Models;
+using BreweryDB.Resources;
 
 namespace BreweryDB
 {
@@ -11,29 +13,31 @@ namespace BreweryDB
         {
             ApplicationKey = key;
 
-            Beers = new BeerResource(this);
-            Breweries = new BreweryResource(this);
-            Categories = new CategoryResource(this);
-            Adjuncts = new AdjunctResource(this);
-            Yeasts = new YeastResource(this);
-            SocialSites = new SocialSiteResource(this);
-            Events = new EventResource(this);
-            Features = new FeatureResource(this);
-            Guildes = new GuildResource(this);
-            Fermentables = new FermentableResource(this);
-            FluidSizes = new FluidSizeResource(this);
+            Beers = new BeerResource<Beer>(this);
+            Breweries = new BreweryResource<Brewery>(this);
+            Categories = new CategoryResource<Category>(this);
+            Adjuncts = new AdjunctResource<Adjunct>(this);
+            Yeasts = new YeastResource<Yeast>(this);
+            SocialSites = new SocialSiteResource<SocialSite>(this);
+            Events = new EventResource<Event>(this);
+            Features = new FeatureResource<Feature>(this);
+            Guildes = new GuildResource<Guild>(this);
+            Fermentables = new FermentableResource<Fermentable>(this);
+            FluidSizes = new FluidSizeResource<FluidSize>(this);
+            Changes = new ChangeResource<Change>(this);
         }
 
-        public AdjunctResource Adjuncts { get; private set; }
-        public BeerResource Beers { get; private set; }
-        public BreweryResource Breweries { get; private set; }
-        public CategoryResource Categories { get; private set; }
-        public YeastResource Yeasts { get; private set; }
-        public SocialSiteResource SocialSites { get; set; }
-        public EventResource Events { get; set; }
-        public FeatureResource Features { get; set; }
-        public GuildResource Guildes { get; set; }
-        public FermentableResource Fermentables { get; set; }
-        public FluidSizeResource FluidSizes { get; set; }
+        public AdjunctResource<Adjunct> Adjuncts { get; set; }
+        public BeerResource<Beer> Beers { get; set; }
+        public BreweryResource<Brewery> Breweries { get; set; }
+        public CategoryResource<Category> Categories { get; set; }
+        public YeastResource<Yeast> Yeasts { get; set; }
+        public SocialSiteResource<SocialSite> SocialSites { get; set; }
+        public EventResource<Event> Events { get; set; }
+        public FeatureResource<Feature> Features { get; set; }
+        public GuildResource<Guild> Guildes { get; set; }
+        public FermentableResource<Fermentable> Fermentables { get; set; }
+        public FluidSizeResource<FluidSize> FluidSizes { get; set; }
+        public ChangeResource<Change> Changes { get; set; }
     }
 }

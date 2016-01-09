@@ -7,12 +7,12 @@ using BreweryDB.Models;
 
 namespace BreweryDB.Interfaces
 {
-    public interface IBeer : IBase
+    public interface IBeer 
     {
         string Id { get; set; }
         string Name { get; set; }
         string NameDisplay { get; set; }
-        string Description { get; set; }
+        string Description { get; }
         double Abv { get; set; }
         int GlasswareId { get; set; }
         int SrmId { get; set; }
@@ -28,7 +28,7 @@ namespace BreweryDB.Interfaces
         IAvailable Available { get; set; }
         IStyle Style { get; set; }
         List<Brewery> Breweries { get; set; }
-        IImages Labels { get; set; }
+        ILabels Labels { get; set; }
         List<ISocialAccount> SocialAccounts { get; set; }
         string ServingTemperature { get; set; }
         string Brewery { get; }

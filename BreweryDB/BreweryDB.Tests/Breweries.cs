@@ -85,8 +85,7 @@ namespace BreweryDB.Tests
             Assert.IsTrue(response.TotalResults >= 2);
 
             var brewery = response.Data.FirstOrDefault();
-            Assert.IsTrue(brewery?.Id == "fO5IlN");
-            Assert.IsTrue(brewery.Name == "Brouwerij Duvel Moortgat");
+            Assert.IsNotNull(brewery);
         }
     }
 }

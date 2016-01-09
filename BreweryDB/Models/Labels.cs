@@ -10,9 +10,5 @@ namespace BreweryDB.Models
         public string Medium { get; set; }
 
         public string Large { get; set; }
-
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
     }
 }

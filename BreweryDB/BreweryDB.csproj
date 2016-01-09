@@ -39,7 +39,6 @@
     <Compile Include="Helpers\NameValueCollection.cs" />
     <Compile Include="Interfaces\IAdjunct.cs" />
     <Compile Include="Interfaces\IAvailability.cs" />
-    <Compile Include="Interfaces\IBase.cs" />
     <Compile Include="Interfaces\IBeer.cs" />
     <Compile Include="Interfaces\IBrewery.cs" />
     <Compile Include="Interfaces\ICategory.cs" />
@@ -60,6 +59,7 @@
     <Compile Include="Interfaces\ISrm.cs" />
     <Compile Include="Interfaces\IStyle.cs" />
     <Compile Include="Interfaces\IYeast.cs" />
+    <Compile Include="Models\Change.cs" />
     <Compile Include="Models\Characteristic.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Feature.cs" />
@@ -67,6 +67,8 @@
     <Compile Include="Models\Guild.cs" />
     <Compile Include="Models\RequestParameters\EventRequestParameters.cs" />
     <Compile Include="Models\SocialSite.cs" />
+    <Compile Include="Models\SubAttribute.cs" />
+    <Compile Include="Resources\ChangeResource.cs" />
     <Compile Include="Resources\EventResource.cs" />
     <Compile Include="Models\Fermentable.cs" />
     <Compile Include="Resources\SocialSiteResource.cs" />

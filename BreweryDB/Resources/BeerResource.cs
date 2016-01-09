@@ -6,7 +6,7 @@ using BreweryDB.Models;
 
 namespace BreweryDB.Resources
 {
-    public class BeerResource 
+    public class BeerResource<T>
     {
         private BreweryDbClient client;
 
@@ -15,24 +15,24 @@ namespace BreweryDB.Resources
             client = breweryDbClient;
         }
 
-        async public Task<ResponseContainer<List<Beer>>> GetAll()
+        public async Task<ResponseContainer<List<T>>> GetAll()
         {
             return await GetAll(1);
         }
 
-        async public Task<ResponseContainer<List<Beer>>> GetAll(int pageNumber)
+        public async Task<ResponseContainer<List<T>>> GetAll(int pageNumber)
         {
-            var url = $"{BreweryDbClient.BaseAddress}beers?p={pageNumber}&key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Beer>>>(url);            
+            var url = $"{BreweryDbClient.BaseAddress}beers?p={pageNumber}&withBreweries=y&key={BreweryDbClient.ApplicationKey}&format=json";
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);            
         }
 
-        async public Task<ResponseContainer<Beer>> Get(string id)
+        public async Task<ResponseContainer<T>> Get(string id)
         {
-            var url = $"{BreweryDbClient.BaseAddress}beer/{id}?key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<Beer>>(url);
+            var url = $"{BreweryDbClient.BaseAddress}beer/{id}?withBreweries=y&key={BreweryDbClient.ApplicationKey}&format=json";
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<T>>(url);
         }
 
-        async public Task<ResponseContainer<List<Beer>>> Get(NameValueCollection nvc)
+        public async Task<ResponseContainer<List<T>>> Get(NameValueCollection nvc)
         {
             var parameterBuilder = new StringBuilder();
             foreach (var parameter in nvc)
@@ -44,13 +44,13 @@ namespace BreweryDB.Resources
             }
 
             var url = $"{BreweryDbClient.BaseAddress}beers?{parameterBuilder}key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Beer>>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);
         }
 
-        async public Task<ResponseContainer<List<Beer>>> Search(string keyword)
+        public async Task<ResponseContainer<List<T>>> Search(string keyword)
         {
             var url = $"{BreweryDbClient.BaseAddress}search?q={keyword}&type=beer&withBreweries=y&withSocialAccounts=y&withGuilds=y&withLocations=y&withAlternateNames=y&withIngredients=y&key={BreweryDbClient.ApplicationKey}&format=json";
-            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<Beer>>>(url);
+            return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);
         }
     }
 }
