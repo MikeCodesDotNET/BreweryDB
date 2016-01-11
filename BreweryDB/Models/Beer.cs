@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BreweryDB.Helpers;
 using BreweryDB.Interfaces;
 using Newtonsoft.Json;
 
@@ -7,7 +8,7 @@ namespace BreweryDB.Models
 {
     public class Beer  : IBeer
     {
-        public Beer(Glass glass, Srm srm, Available available, Style style, List<Brewery> breweries, Labels labels,
+        public Beer(IGlass glass, ISrm srm, IAvailable available, IStyle style, List<Brewery> breweries, ILabels labels,
             List<SocialAccount> socialAccounts)
         {
             Glass = glass;
@@ -33,11 +34,21 @@ namespace BreweryDB.Models
         public string StatusDisplay { get; set; }
         public string CreateDate { get; set; }
         public string UpdateDate { get; set; }
+
+        [JsonConverter(typeof(ConcreteConverter<Glass>))]
         public IGlass Glass { get; set; }
+
+        [JsonConverter(typeof(ConcreteConverter<Srm>))]
         public ISrm Srm { get; set; }
+
+        [JsonConverter(typeof(ConcreteConverter<Available>))]
         public IAvailable Available { get; set; }
+
+        [JsonConverter(typeof(ConcreteConverter<Style>))]
         public IStyle Style { get; set; }
         public List<Brewery> Breweries { get; set; }
+
+        [JsonConverter(typeof(ConcreteConverter<Labels>))]
         public ILabels Labels { get; set; }
         public List<ISocialAccount> SocialAccounts  { get; set; }
         public string ServingTemperature { get; set; }

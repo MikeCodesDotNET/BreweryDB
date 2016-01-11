@@ -20,15 +20,23 @@ namespace BreweryDB.Resources
             return await GetAll(1);
         }
 
-        public async Task<ResponseContainer<List<T>>> GetAll(int pageNumber)
+        public async Task<ResponseContainer<List<T>>> GetAll(int pageNumber, bool hasLabels = false)
         {
-            var url = $"{BreweryDbClient.BaseAddress}beers?p={pageNumber}&withBreweries=y&key={BreweryDbClient.ApplicationKey}&format=json";
+            var labels = "n";
+            if (hasLabels == true)
+                labels = "y";
+
+            var url = $"{BreweryDbClient.BaseAddress}beers?p={pageNumber}&withBreweries=y&hasLabels={labels}&key={BreweryDbClient.ApplicationKey}&format=json";
             return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);            
         }
 
-        public async Task<ResponseContainer<T>> Get(string id)
+        public async Task<ResponseContainer<T>> Get(string id, bool hasLabels = false)
         {
-            var url = $"{BreweryDbClient.BaseAddress}beer/{id}?withBreweries=y&key={BreweryDbClient.ApplicationKey}&format=json";
+            var labels = "n";
+            if (hasLabels == true)
+                labels = "y";
+
+            var url = $"{BreweryDbClient.BaseAddress}beer/{id}?withBreweries=y&hasLabels={labels}&key={BreweryDbClient.ApplicationKey}&format=json";
             return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<T>>(url);
         }
 
@@ -49,7 +57,7 @@ namespace BreweryDB.Resources
 
         public async Task<ResponseContainer<List<T>>> Search(string keyword)
         {
-            var url = $"{BreweryDbClient.BaseAddress}search?q={keyword}&type=beer&withBreweries=y&withSocialAccounts=y&withGuilds=y&withLocations=y&withAlternateNames=y&withIngredients=y&key={BreweryDbClient.ApplicationKey}&format=json";
+            var url = $"{BreweryDbClient.BaseAddress}search?q={keyword}&type=beer&withBreweries=y&withSocialAccounts=y&withGuilds=y&withLocations=y&withAlternateNames=y&hasLabels=y&withIngredients=y&key={BreweryDbClient.ApplicationKey}&format=json";
             return await JsonDownloader.DownloadSerializedJsonDataAsync<ResponseContainer<List<T>>>(url);
         }
     }
