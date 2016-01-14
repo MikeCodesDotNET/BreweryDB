@@ -17,7 +17,7 @@ namespace BreweryDB.Tests
         private readonly BreweryDbClient client = new BreweryDbClient(Keys.ApplicationKey);
 
         [Test()]
-        public async void ByDate()
+        public async Task ByDate()
         {
             var response = await client.Features.Get(new DateTime(2012, 04, 1));
 
@@ -33,7 +33,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetAll()
+        public async Task GetAll()
         {
             var response = await client.Features.GetAll();
 
@@ -45,7 +45,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void ThisWeeks()
+        public async Task ThisWeeks()
         {
             var response = await client.Features.ThisWeeks();
 

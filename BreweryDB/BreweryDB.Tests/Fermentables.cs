@@ -17,7 +17,7 @@ namespace BreweryDB.Tests
         private readonly BreweryDbClient client = new BreweryDbClient(Keys.ApplicationKey);
 
         [Test()]
-        public async void ById()
+        public async Task ById()
         {
             var response = await client.Fermentables.Get("165");
 
@@ -32,7 +32,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetAll()
+        public async Task GetAll()
         {
             var response = await client.Fermentables.GetAll();
 
@@ -46,17 +46,14 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetPage()
+        public async Task GetPage()
         {
             var response = await client.Fermentables.GetAll(3);
 
             Assert.IsTrue(response.Status == "success");
 
             var fermentable = response.Data.FirstOrDefault();
-            Assert.IsTrue(fermentable.Id == "427");
-            Assert.IsTrue(fermentable.Name == "Cherry Smoked");
-            Assert.IsTrue(fermentable.Category == "malt");
-            Assert.IsTrue(fermentable.CategoryDisplay == "Malts, Grains, & Fermentables");
+            Assert.IsNotNull(fermentable);
         }
     }
 }

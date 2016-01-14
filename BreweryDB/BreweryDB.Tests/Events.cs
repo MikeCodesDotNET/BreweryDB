@@ -17,7 +17,7 @@ namespace BreweryDB.Tests
         private readonly BreweryDbClient client = new BreweryDbClient(Keys.ApplicationKey);
 
         [Test()]
-        public async void ById()
+        public async Task ById()
         {
             var response = await client.Events.Get("cJio9R");
 
@@ -32,7 +32,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetAll()
+        public async Task GetAll()
         {
             var response = await client.Events.GetAll();
 
@@ -46,7 +46,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetPage()
+        public async Task GetPage()
         {
             var response = await client.Events.GetAll(1);
 
@@ -60,7 +60,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetWithParameters()
+        public async Task GetWithParameters()
         {
             var parameters = new NameValueCollection { { EventRequestParameters.Year, "2008" } };
             var response = await client.Events.Get(parameters);
@@ -76,7 +76,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void Search()
+        public async Task Search()
         {
             var response = await client.Events.Search("B'dam BrewJAM");
 

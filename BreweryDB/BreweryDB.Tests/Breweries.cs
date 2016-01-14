@@ -17,7 +17,7 @@ namespace BreweryDB.Tests
         private readonly BreweryDbClient client = new BreweryDbClient(Keys.ApplicationKey);
 
         [Test()]
-        public async void ById()
+        public async Task ById()
         {
             var response = await client.Breweries.Get("YXDiJk");
 
@@ -30,7 +30,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetAll()
+        public async Task GetAll()
         {
             var response = await client.Breweries.GetAll();
 
@@ -45,21 +45,22 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetPage()
+        public async Task GetPage()
         {
             var response = await client.Breweries.GetAll(4);
 
             Assert.IsTrue(response.Status == "success");
             Assert.IsTrue(response.CurrentPage == 4);
-            Assert.IsTrue(response.NumberOfPages >= 141);
-            Assert.IsTrue(response.TotalResults >= 7044);
+            Assert.IsTrue(response.NumberOfPages >= 100);
+            Assert.IsTrue(response.TotalResults >= 6000);
 
             var beer = response.Data.FirstOrDefault();
-            Assert.IsTrue(beer.Id == "aJQnv0");
+            Assert.IsNotNull(beer);
+
         }
 
         [Test()]
-        public async void GetWithParameters()
+        public async Task GetWithParameters()
         {
             var parameters = new Helpers.NameValueCollection {{BreweryRequestParameters.Name, "Ad Lib Brewing Company" } };
             var response = await client.Breweries.Get(parameters);
@@ -75,14 +76,14 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void Search()
+        public async Task Search()
         {
             var response = await client.Breweries.Search("duvel");
 
             Assert.IsTrue(response.Status == "success");
             Assert.IsTrue(response.CurrentPage == 1);
             Assert.IsTrue(response.NumberOfPages >= 1);
-            Assert.IsTrue(response.TotalResults >= 2);
+            Assert.IsTrue(response.TotalResults >= 1);
 
             var brewery = response.Data.FirstOrDefault();
             Assert.IsNotNull(brewery);

@@ -26,7 +26,7 @@ namespace BreweryDB.Tests
             Assert.IsTrue(response.Status == "success");
             Assert.IsTrue(response.CurrentPage == 1);
 
-            var beer = response.Data.FirstOrDefault();
+            var beer = response.Data.FirstOrDefault(x => x.Labels != null);
 
             //Images
             Assert.IsTrue(beer.Labels != null);

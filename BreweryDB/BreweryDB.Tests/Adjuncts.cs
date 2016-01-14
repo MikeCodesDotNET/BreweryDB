@@ -17,7 +17,7 @@ namespace BreweryDB.Tests
         private readonly BreweryDbClient client = new BreweryDbClient(Keys.ApplicationKey);
 
         [Test()]
-        public async void ById()
+        public async Task ById()
         {
             var response = await client.Adjuncts.Get("923");
 
@@ -33,7 +33,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetAll()
+        public async Task GetAll()
         {
             var response = await client.Adjuncts.GetAll();
 
@@ -47,7 +47,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetPage()
+        public async Task GetPage()
         {
             var response = await client.Adjuncts.GetAll(4);
 

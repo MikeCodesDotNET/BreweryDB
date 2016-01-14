@@ -17,7 +17,7 @@ namespace BreweryDB.Tests
         private readonly BreweryDbClient client = new BreweryDbClient(Keys.ApplicationKey);
 
         [Test()]
-        public async void ById()
+        public async Task ById()
         {
             var response = await client.Guildes.Get("EdRcIs");
 
@@ -31,7 +31,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetAll()
+        public async Task GetAll()
         {
             var response = await client.Guildes.GetAll();
 
@@ -43,7 +43,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void GetPage()
+        public async Task GetPage()
         {
             var response = await client.Guildes.GetAll(2);
 
@@ -54,7 +54,7 @@ namespace BreweryDB.Tests
         }
 
         [Test()]
-        public async void Search()
+        public async Task Search()
         {
             var response = await client.Guildes.Search("Alabama Brewers Guild");
 
