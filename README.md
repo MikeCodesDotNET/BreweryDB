@@ -1,6 +1,7 @@
 # BreweryDB
-[![Build Status](https://www.bitrise.io/app/3735847bfb75f667.svg?token=A_GJ04CSfVtaF_2D7kMzRg)](https://www.bitrise.io/app/3735847bfb75f667)
-![alt tag](http://www.brewerydb.com/img/badge.png)
+![alt tag](http://www.brewerydb.com/img/badge.png)  
+
+[![Build Status](https://www.bitrise.io/app/3735847bfb75f667.svg?token=A_GJ04CSfVtaF_2D7kMzRg)](https://www.bitrise.io/app/3735847bfb75f667)  
 
 A simple to use .NET based API for calling into BreweryDB. 
 
