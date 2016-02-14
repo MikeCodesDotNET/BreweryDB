@@ -1,6 +1,9 @@
 ﻿using BreweryDB.Interfaces;
 using BreweryDB.Models;
 using BreweryDB.Resources;
+using System.Net.Http;
+using System;
+using BreweryDB.Helpers;
 
 namespace BreweryDB
 {
@@ -9,9 +12,12 @@ namespace BreweryDB
         public static string ApplicationKey { get; private set; }
         public static readonly string BaseAddress = "https://api.brewerydb.com/v2/";
         
-        public BreweryDbClient(string key)
+        public BreweryDbClient(string key, Func<HttpClient> httpClientFactory = null)
         {
             ApplicationKey = key;
+
+            if (httpClientFactory != null)
+                JsonDownloader.HttpClientFactory = httpClientFactory;
 
             Beers = new BeerResource<Beer>(this);
             Breweries = new BreweryResource<Brewery>(this);

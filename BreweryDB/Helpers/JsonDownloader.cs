@@ -12,9 +12,11 @@ namespace BreweryDB.Helpers
 {
     public static class JsonDownloader
     {
+        public static Func<HttpClient> HttpClientFactory { get; set; } = new Func<HttpClient>(() => new HttpClient());
+
         public static async Task<T> DownloadSerializedJsonDataAsync<T>(string url) where T : new()
         {
-            using (var httpClient = new HttpClient())
+            using (var httpClient = HttpClientFactory())
             {
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 var jsonData = string.Empty;
