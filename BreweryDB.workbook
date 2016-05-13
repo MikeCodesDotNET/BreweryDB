@@ -72,7 +72,7 @@ The client allows us to query the following enpoints:
 
 ### Querying Beers
 
-In our first example, lets go ahead and ask BreweryDB to return a beer by its ID. We’ll be requesting it returns data about one of my favourite beers (a Kasteel Donker).
+In our first example, lets go ahead and ask BreweryDB to return a beer by its ID. It’ll be returning data on one of my favourite beers (a Kasteel Donker).
 
 ```csharp
 var response = await client.Beers.Get("J4UYYJ");
