@@ -1,0 +1,83 @@
+```json
+{"exec-mode":"default","platform":"iOS","uti":"com.xamarin.workbook","packages":[{"id":"Newtonsoft.Json","version":"8.0.3"},{"id":"Microsoft.Net.Http","version":"2.2.29"},{"id":"BreweryDB","version":"1.1.5"},{"id":"Microsoft.Bcl","version":"1.1.10"}]}
+```
+
+# BreweryDB .NET SDK
+
+![BreweryDB Logo](https://camo.githubusercontent.com/1b994997e52e7ed4e1cc811d739cad0c4ebd7e0a/687474703a2f2f7777772e6272657765727964622e636f6d2f696d672f62616467652e706e67)
+
+#### About the SDK
+
+[BreweryDB .NET](https://github.com/MikeCodesDotNet/BreweryDB "BreweryDB .NET") is a simple to use .NET based API for calling into BreweryDB.
+
+[BreweryDB ](http://www.brewerydb.com "BreweryDB")is your database of breweries, beers, beer events and guilds!
+
+#### Learning Objectives
+
+Discover the awesomeness of the BreweryDB REST API using a .NET SDK. In this workbook, you’ll learn the following:
+
+* Create a BreweryDB .NET Client
+
+* Query all beers
+
+* Search the DB
+
+* Query breweries
+
+* Download artwork asynchronously
+
+#### Requirements
+
+* A valid [BreweryDB API Key](http://www.brewerydb.com/developers "BreweryDB API key") (only tested with a premium key)
+
+---
+
+### Setup
+
+First, we'll start by adding the BreweryDB SDK to the workbook, then we’ll import several namespaces that we will need.
+
+```csharp
+#r "BreweryDB"
+
+using BreweryDB;
+using BreweryDB.Helpers;
+using BreweryDB.Models;
+```
+
+### Creating a Client
+
+We'll need to create an instance of the BreweryDBClient. The client is responsible for dealing with your API key as well as acting as an entry point for the availableendpoints.
+
+```csharp
+private readonly BreweryDbClient client = new BreweryDbClient("b7da1c5827026053a276f0dbe2234962");
+```
+
+The client allows us to query the following enpoints:
+
+* [Adjuntcs](http://www.brewerydb.com/developers/docs-endpoint/adjunct_index "Adjuncts")
+
+* [Beers](http://www.brewerydb.com/developers/docs-endpoint/beer_index "Beers")
+
+* [Breweries](http://www.brewerydb.com/developers/docs-endpoint/brewery_index "Breweries")
+
+* [Categories](http://www.brewerydb.com/developers/docs-endpoint/category_index "Categories")
+
+* [Events](http://www.brewerydb.com/developers/docs-endpoint/event_index "Events")
+
+* [Features](http://www.brewerydb.com/developers/docs-endpoint/feature_index "Features")
+
+* [Socials](http://www.brewerydb.com/developers/docs-endpoint/socialsite_index "Socials")
+
+* [Yeasts](http://www.brewerydb.com/developers/docs-endpoint/yeast_index "Yeasts")
+
+### Querying Beers
+
+In our first example, lets go ahead and ask BreweryDB to return a beer by its ID. We’ll be requesting it returns data about one of my favourite beers (a Kasteel Donker).
+
+```csharp
+var response = await client.Beers.Get("J4UYYJ");
+```
+
+```csharp
+var beer = response.Data;
+```
