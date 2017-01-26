@@ -25,6 +25,7 @@ namespace BreweryDB.Models
         public string NameDisplay { get; set; }
         public string Description { get; set; }
         public double Abv { get; set; }
+        public double IBU { get; set; }
         public int GlasswareId { get; set; }
         public int SrmId { get; set; }
         public int AvailableId { get; set; }
